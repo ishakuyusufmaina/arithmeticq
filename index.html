@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <!-- Latest compiled and minified CSS -->
+<link href=/"https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src=/"https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src=/"https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <title>Hello, World!</title>
+  <script src="scripts/constants.js">
+  </script>
+   <script src="scripts/arithQ.js">
+  </script>
+   <script src="scripts/components.js">
+  </script>
+  <script src="scripts/style.js">
+</script>
+<script src="scripts/arithQApp.js" defer="">
+</script>
+</head>
+<body>
+  <header>
+    <button id="volBtn"><i id="vol" class="material-icons"></i></button>
+    <h1>
+      Arithmetic Q
+    </h1>
+    <small>Work in progress...</small>
+  </header>
+  <div id="root" class="container">
+    
+
+    
+  </div>
+  
+  <footer>
+    ©Ishaku Yusuf Maina
+    <a href="https://wa.me/2349045060362">Whatsapp me</a>
+  </footer>
+  
+  <script>
+  root = document.getElementById("root");
+ 
+  let isMute = true;
+  let iconTxt = "volume_";
+  volBtn.onclick = ()=>{
+    isMute = !isMute;
+    vol.innerHTML = iconTxt + ((isMute)? "off" : "up");
+  }
+  volBtn.click();
+  
+  function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.currentTime = 0;
+    if (isMute) return;
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+   
+}
+ 
+ const wrongans = new sound("audio/wrongans.mp3");
+  const success = new sound("audio/success.mp3");
+  const startsound = new sound("audio/start.mp3");
+  const clicksound = new sound("audio/click.mp3");
+  const picksound = new sound("audio/pick.mp3");
+  
+ 
+  </script>
+<style>
+#volBtn {
+  float: right;
+}
+</style>
+</body>
+
+</html>
