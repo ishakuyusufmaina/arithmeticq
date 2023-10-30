@@ -1,14 +1,15 @@
 class App {
     constructor(){
-this.root = document.createElement("div");
+        this.root = document.createElement("div");
         this.root.id = "app";
-this.level = 0;
-this.user = null;
-this.question = "";
-this.ans="";
-        
-this.promptLevelChoice();
+        this.level = 0;
+        this.user = null;
+        this.question = "";
+        this.ans="";
+        this.onQuestionAdmin = ()=>{};
+        this.promptLevelChoice();
         this.state="";
+        this.time = 15;
     }
     
     resume(level, user, question, ans){
@@ -38,10 +39,12 @@ startQuiz(){
 
 adminQuestion (){
     this.question = new Question(this.level)
-    this.questComp = new QuestionComponent(this.question)
+    this.questComp = new QuestionComponent(this.question);
+    this.questComp.onQuestion = this.onQuestionAdmin;
     this.keyboard = new Keyboard();
-    this.questComp.render(this.root);
-    this.keyboard.appendTo(this.root)
+    this.root.innerHTML = `<p id='count-down'>${this.time}</p>`;
+    this.questComp.appendTo(this.root);
+    this.keyboard.appendTo(this.root);
     //keyboard.disable();
     this.keyboard.setOnInput((keybtn)=>{
         let key = keybtn.textContent;
@@ -80,7 +83,8 @@ adminQuestion (){
        // promptConti();
             })
     this.state = "QuestAdmin";
-        } 
+    
+} 
 
 
 
@@ -148,16 +152,45 @@ retakePrompt(){
     this.retakingInp.appendTo(this.root);
     this.retakingInp.onInput((isRetaking)=>{
         if (isRetaking){
-            this.promptLevelChoice();
+            this.startQuiz();
+            //this.promptLevelChoice();
         }
         else {
             //I don't know
+            this.promptLevelChoice();
         }
     })
 }
     
 }
+
+
 let app = new App();
+
+//a little extension
+var timerId;
+app.onQuestionAdmin = ()=>{
+    clearInterval(timerId);
+    let enter = app.root.querySelector("#kEnter");
+    enter.addEventListener("click", ()=>{clearInterval(timerId)});
+    let counter = app.root.querySelector("#count-down");
+    countDown(app.time, (count)=>{
+        counter.innerHTML = count;
+    }, ()=>{enter.click()})
+}
+
+
+function countDown(count, onCount, onFinish){
+    if (count){
+       timerId =  setTimeout(()=>{
+            count--;
+            onCount(count);
+            countDown(count, onCount, onFinish)}, 1000)
+    } else {
+        clearInterval(timerId);
+        onFinish();
+    }
+}
 //app = JSON.stringify(app);
 //app = JSON.parse(app);
 document.getElementById("root").appendChild(app.root);
