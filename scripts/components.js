@@ -107,6 +107,7 @@ class QuestionComponent extends Component {
         this.inputBtn = create("button");
         this.inputBtn.textContent = "Enter"
         */
+        this.onQuestion = ()=>{};
         let o1kf1 = question.term1;
         let o2kf1 = question.term2;
         let op = question.operator;
@@ -145,6 +146,7 @@ class QuestionComponent extends Component {
      }
         else {
             this.value.classList.toggle("hide");
+            this.onQuestion();
         }
         
     }
@@ -257,4 +259,4 @@ class Keyboard extends Component {
             btn.setAttribute("disabled", bool)
         })
     }
-}
+                }
