@@ -1,7 +1,10 @@
 body {
   
   user-select: none;
-  background-color: lightgray;
+  background: url(bg2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 28px;
   
   }
 header {
@@ -13,7 +16,24 @@ header {
   position: relative;
   border: 1px solid black;
   padding: 10px;
+  background: rgba(0,0,0, .5);
+  color: white;
+  
   }
+
+#count-down {
+  border-radius: 50%;
+  color: white;
+  background: crimson;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  aspect-ratio: 1;
+  padding: 5px;
+  font-weight: bold;
+  
+  
+}
 
 #microfeedback {
   position: absolute;
@@ -22,18 +42,22 @@ header {
   margin: auto;
   padding: 10px;
   background-color: lightblue;
+  color: black;
   opacity: .9
   }
 
 
 footer {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
+  background: black;
+  color: white;
+  padding: 5px;
 }
 
 .keyboard {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: calc(100%/3) calc(100%/3) calc(100%/3);
   padding: 10px;
   background-color: #2196F3;
 }
@@ -49,6 +73,8 @@ footer {
 
 #kEnter {
   background-color: red;
+  color: white;
+  font-weight: bold;
 }
 
 #kDel {
@@ -56,6 +82,10 @@ footer {
 }
 
 #root {
+  
+}
+
+#app {
   
 }
 
