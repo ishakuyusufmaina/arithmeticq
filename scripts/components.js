@@ -48,7 +48,6 @@ class LevelInput extends Component{
         this.levels = createRadios(model)
         this.inputBtn = create("button");
         this.inputBtn.innerText = "Enter";
-       this.inputBtn.className = "enter-btn";
         this.level = 100;
         this.playPick = ()=>{};
         this.levels.forEach((level, i, levels)=>{
@@ -224,8 +223,6 @@ class SummaryView extends Component{
         return sum
     }
 }
-
-
 
 //******************************
 
