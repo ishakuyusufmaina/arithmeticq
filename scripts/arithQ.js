@@ -162,5 +162,6 @@ class Summary {
 
 
 function isCorrect(q, a){
+    
     return q.evaluate() == eval(a);
 };
