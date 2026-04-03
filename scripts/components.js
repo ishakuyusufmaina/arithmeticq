@@ -48,12 +48,12 @@ class LevelInput extends Component{
         this.levels = createRadios(model)
         this.inputBtn = create("button");
         this.inputBtn.innerText = "Enter";
-        this.level = 100;
+        this.level = 10;
         this.playPick = ()=>{};
         this.levels.forEach((level, i, levels)=>{
            let radio = level.radio
             if (i==0){radio.checked=true}
-            radio.value= (i+1)*100
+            radio.value= (i+1)*10
             radio.onchange = ()=>{
                 if (radio.checked) {
                     this.level = radio.value;
