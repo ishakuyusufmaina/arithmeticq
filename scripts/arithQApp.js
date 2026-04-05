@@ -17,12 +17,13 @@
     }
     
 promptLevelChoice (){
-    this.levelInput = new LevelInput(DIFFICULTY);
-    this.levelInput.render(this.root);
-    this.levelInput.playPick = ()=>{picksound.play()};
-    this.levelInput.onInput((level)=>{
-        this.level = level
-        this.startQuiz();
+    this.levelInput = new LevelInput().init(DIFFICULTY);
+    this.root.append(this.levelInput)
+    this.levelInput.onchange = ()=>{picksound.play()};
+    this.levelInput.onenter = ((levelInp)=>{
+        if (!levelInp.level) return;
+        this.level = levelInp.level;
+        setTimeout(e=>this.startQuiz(), 500);
     })
     this.state="LevelChoice";
 }
