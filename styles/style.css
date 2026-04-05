@@ -5,8 +5,27 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   padding-bottom: 28px;
+
+  
   
   }
+
+body {
+  user-select: none;
+  background-image: url('bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+ // color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  padding-top: 100px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
 header {
   border-bottom: .5px solid black;
   margin-bottom: 5px;
