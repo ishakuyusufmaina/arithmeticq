@@ -42,49 +42,7 @@ function createRadios (labels){
 
 //*****************************
 
-class LevelInput extends Component{
-    constructor (model){
-        super();
-        this.levels = createRadios(model)
-        this.inputBtn = create("button");
-        this.inputBtn.innerText = "Enter";
-        this.level = 10;
-        this.playPick = ()=>{};
-        this.levels.forEach((level, i, levels)=>{
-           let radio = level.radio
-            if (i==0){radio.checked=true}
-            radio.value= (i+1)*10
-            radio.onchange = ()=>{
-                if (radio.checked) {
-                    this.level = radio.value;
-                    this.playPick();
-                   // picksound.play();
-                }
-            }
-        })
-    }
-    onInput(callback){
-        this.inputBtn.onclick = ()=>{
-            callback(this.level)
-        }
-    }
-    view(){
-        let prompt = create("div");
-        let oList = create("ol");
-        let enterBtn = this.inputBtn
-        this.levels.forEach((level, i, levels)=>{
-            let radio = level.radio;
-            let label = level.label;
-            let list = create("li");
-            list.appendChild(radio);
-            list.appendChild(label)
-            oList.appendChild(list);
-        })
-        prompt.appendChild(oList)
-        prompt.appendChild(enterBtn)
-        return prompt
-    }
-}
+
 //******************************
 
 class QuestionComponent extends Component {
