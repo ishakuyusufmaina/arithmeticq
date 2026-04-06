@@ -7,9 +7,12 @@
         this.question = "";
         this.ans="";
         this.onQuestionAdmin = ()=>{};
-        this.promptLevelChoice();
+        
         this.state="";
         this.time = 15;
+        document.getElementById("root").appendChild(this.root);
+        this.promptLevelChoice();
+
     }
     
     resume(level, user, question, ans){
@@ -18,7 +21,12 @@
     
 promptLevelChoice (){
     this.levelInput = new LevelInput().init(DIFFICULTY);
+    this.root.innerHTML = "";
     this.root.append(this.levelInput)
+    this.levelInput.scrollIntoView({behavior: "smooth", block: "start"});
+    this.root.scrollIntoView({behavior: "smooth", block: "start"});
+   // this.root.parentElement.scrollIntoView({behavior: "smooth", block: "start"});
+
     this.levelInput.onchange = ()=>{picksound.play()};
     this.levelInput.onenter = ((levelInp)=>{
         if (!levelInp.level) return;
@@ -40,15 +48,18 @@ startQuiz(){
 
 adminQuestion (){
     this.question = new Question(this.level)
-    this.questComp = new QuestionComponent(this.question);
+    this.questComp = new QuestionComponent();
+    this.questComp.setQuestion(this.question);
     this.questComp.onQuestion = this.onQuestionAdmin;
     this.keyboard = new Keyboard();
-    this.root.innerHTML = `<p id='count-down'>${this.time}</p>`;
-    this.questComp.appendTo(this.root);
-    this.keyboard.appendTo(this.root);
+    this.timer = new Timer();
+    this.root.innerHTML = "";
+    this.root.append(this.timer); //innerHTML = `<p id='count-down'>${this.time}</p>`;
+    this.root.append(this.questComp);
+    this.root.append(this.keyboard);
     //keyboard.disable();
-    this.keyboard.setOnInput((keybtn)=>{
-        let key = keybtn.textContent;
+    this.keyboard.oninput = ((key)=>{
+        //let key = keybtn.textContent;
         //to avoid forcing the sys perform subtraction
         if (key=="-" & this.ans.length>0){return}
         if (this.ans.search(/[.]/gi) != -1 & key==".") {
@@ -58,16 +69,16 @@ adminQuestion (){
         else if ((this.ans[this.ans.length-1]=='.' || this.ans[this.ans.length-1]=='-') & key=="-"){
             return
         }
-        switch (key) {
+        switch (key.toLowerCase()) {
             
-            case "Enter":
-            this.keyboard.setDisabled(true);
+            case "enter":
+            this.keyboard.disabled = true;
                 this.enterAnswer();
                 this.ans = "";
                 //this.promptConti();
                 break;
             
-            case "Del": 
+            case "del": 
                 this.ans = this.ans.slice(0, -1);
                 this.questComp.setAnswer(this.ans);
                 break;
@@ -83,8 +94,11 @@ adminQuestion (){
         //enterAnswer()
        // promptConti();
             })
-    this.state = "QuestAdmin";
-    
+    this.state = "QuestionAdmin";
+    this.timer.duration = this.time;
+    this.timer.start();
+    this.timer.onend = e=>this.keyboard.enterKey.click();
+   // this.timer.ontick = e=> tick();
 } 
 
 
@@ -114,9 +128,10 @@ enterAnswer (){
 
 
 promptConti(){
-    let contInput = new ContinueInput(CONTINUETY_PROMPT);
+    let contInput = new ContinueInput();
     let microf = document.getElementById("microfeedback");
-    contInput.appendTo(microf);
+    contInput.container.prepend(microf);
+    this.root.append(contInput);
     contInput.onInput((cont)=>{
         if (cont) {
             this.adminQuestion()
@@ -133,16 +148,19 @@ promptConti(){
 
 giveFeedback(){
     let feedback = new Feedback(this.user.getQAs())
-    let feedbackView = new FeedbackView(feedback)
-    feedbackView.render(this.root);
+    let feedbackView = new FeedbackView();
+    this.root.append(feedbackView)
+    feedbackView.init(feedback);
+    this.feedbackView = feedbackView;
+    //feedbackView.render();
     this.state = "EndOfSession";
 }
 
 
 giveSummary(){
     let summary = new Summary(this.user, this.level)
-    let summaryView = new SummaryView(summary)
-    summaryView.appendTo(this.root);
+    let summaryView = new SummaryView();
+    this.feedbackView.container.append(summaryView.view(summary));
 }
 
 
@@ -150,7 +168,7 @@ giveSummary(){
 
 retakePrompt(){
     this.retakingInp = new RetakeInput();
-    this.retakingInp.appendTo(this.root);
+    this.feedbackView.container.append(this.retakingInp);
     this.retakingInp.onInput((isRetaking)=>{
         if (isRetaking){
             this.startQuiz();
@@ -166,32 +184,26 @@ retakePrompt(){
 }
 
 
-let app = new App();
+const app = new App();
 
 //a little extension
 var timerId;
 app.onQuestionAdmin = ()=>{
-    clearInterval(timerId);
-    let enter = app.root.querySelector("#kEnter");
-    enter.addEventListener("click", ()=>{clearInterval(timerId)});
-    let counter = app.root.querySelector("#count-down");
-    countDown(app.time, (count)=>{
-        counter.innerHTML = count;
-    }, ()=>{enter.click()})
+  
 }
 
-
-function countDown(count, onCount, onFinish){
-    if (count){
-       timerId =  setTimeout(()=>{
-            count--;
-            onCount(count);
-            countDown(count, onCount, onFinish)}, 1000)
-    } else {
-        clearInterval(timerId);
-        onFinish();
-    }
+function animate() {
+  requestAnimationFrame(animate);
+  if (app.state === "QuestionAdmin") {
+      console.log("frame");
+      fitParentToScreen();
+      
+  }
 }
+
+requestAnimationFrame(animate);
+
 //app = JSON.stringify(app);
 //app = JSON.parse(app);
-document.getElementById("root").appendChild(app.root);
+
+
