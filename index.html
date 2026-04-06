@@ -7,11 +7,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css"/>
   <!-- Latest compiled and minified CSS -->
-<link href=/"https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Latest compiled JavaScript -->
-<script src=/"https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src=/"https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <title>Arithmetic Q</title>
   <script src="scripts/constants.js">
   </script>
@@ -21,20 +17,28 @@
   </script>
   <script src="scripts/components/levelInput.js">
   </script>
+    <script src="scripts/components/timer.js">
+  </script>
+    <script src="scripts/components/keyboard.js">
+  </script>
   <script src="scripts/style.js">
 </script>
-<script src="scripts/arithQApp.js" defer="">
+<script src="scripts/arithQApp.js" defer>
 </script>
 </head>
 <body>
   <header>
-    <button id="volBtn"><i id="vol" class="material-icons"></i></button>
+    <button id="volBtn">
+      <i id="vol" class="material-icons"></i>
+ 
+    </button>
     <h1>
       Arithmetic Q
     </h1>
-    <small>Work in progress...</small>
+    
   </header>
-  <div id="root" class="container">
+ 
+  <div id="root">
     
 
     
@@ -81,6 +85,35 @@
   const picksound = new sound("audio/pick.mp3");
   
  
+  
+  function updateView(){
+    scale = Math.min(1, root.scrollHeight / contentHeight)
+  }
+  
+  function fitParentToScreen() {
+  const parent = document.getElementById("root");
+  const wrapper = document.body;
+
+  const availableWidth = window.innerWidth; //wrapper.clientWidth;
+  const availableHeight = window.innerHeight; // wrapper.clientHeight;
+
+  const contentWidth = parent.scrollWidth;
+  const contentHeight = parent.scrollHeight;
+
+  const scaleX = availableWidth / contentWidth;
+  const scaleY = availableHeight / contentHeight;
+
+  const scale = Math.min(1, scaleX, scaleY);
+console.log(999);
+  parent.style.transform = `scale(${scale})`;
+  if (scale!==1){
+    console.log(999);
+    parent.scrollIntoView({block: "start", behavior: "smooth"});
+  }
+}
+//  window.addEventListener("resize", fitParentToScreen);
+  
+  
   </script>
 <style>
 #volBtn {
