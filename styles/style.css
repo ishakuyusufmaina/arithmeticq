@@ -1,119 +1,85 @@
-body {
-  
-  user-select: none;
-  background: url(bg2.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding-bottom: 28px;
-
-  
-  
-  }
-
-body {
-  user-select: none;
+* {
+  border-sizing: border-box;
+}
+html {
   background-image: url('bg2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
- // color: var(--text);
-  display: flex;
-  flex-direction: column;
+}
+body {
+  user-select: none;
+  background-image: url('mathcat.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 20px;
-  padding-top: 100px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  //text-justify: space-between;
+  justify-content: space-between;
+  overflow: auto;
+  //height: 100vh;
+  border: 2px solid navy;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  
 }
-header {
-  border-bottom: .5px solid black;
-  margin-bottom: 5px;
+
+body > header {
+//  background: rgba(180, 180, 180, 0.7);
+  padding: 4px;
+  border-radius: 8px;
+ // background-image: url('hd.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+//  width: 100vw;
+  border: 2px solid navy; //#00eed9;
+  border-radius: 12px;
+  //box-shadow: 0 0 15px #00ffea, 0 0 30px #00ffea;
+  margin-left: 0;
+}
+h1 {
+  text-align: center;
+}
+#volBtn {
+  background: none;
+  border: none;
+}
+
+
+
+h1{
+ // font-size: 5rem;                 /* Make it big and bold */
+  font-weight: 900;
+  background-image: url("clock3.jpg"); /* Your image */
+  background-size: cover;          /* Fill the letters */
+  background-position: center;     /* Center the image */
+  
+  -webkit-background-clip: text;   /* Clip the image to the text */
+  -webkit-text-fill-color: transparent; /* Make text itself transparent */
+  
+  //display: inline-block;           /* Fit background to text width */
 }
 
 #app {
-  position: relative;
-  border: 1px solid black;
-  padding: 10px;
-  background: rgba(0,0,0, .5);
-  color: white;
+ // border: 1px solid black;
+}
+
+body > footer {
+//  background: rgba(180, 180, 180, 0.7);
+  padding: 4px;
+ // border-radius: 8px;
+  //background-image: url('hd.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   
-  }
-
-#count-down {
-  border-radius: 50%;
-  color: white;
-  background: crimson;
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  aspect-ratio: 1;
-  padding: 5px;
-  font-weight: bold;
-  
-  
-}
-
-#microfeedback {
-  position: absolute;
-  top: 5px;
-  border: 1px solid black;
-  margin: auto;
-  padding: 10px;
-  background-color: lightblue;
-  color: black;
-  opacity: .9
-  }
-
-
-footer {
-  position: fixed;
-  bottom: 0;
-  background: black;
-  color: white;
-  padding: 5px;
-}
-
-.keyboard {
-  display: grid;
-  grid-template-columns: calc(100%/3) calc(100%/3) calc(100%/3);
-  padding: 10px;
-  background-color: #2196F3;
-}
-
-.keyboard .key {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 10px;
-  margin: 10px;
-  font-size: 20px;
-  text-align: center;
-}
-
-#kEnter {
-  background-color: red;
-  color: white;
-  font-weight: bold;
-}
-
-#kDel {
-  background-color: green;
-}
-
-#root {
-  
-}
-
-#app {
-  
-}
-
-.question {
-  font-size: 20px;
-  border: 1px solid black;
-  padding: 5px;
-}
-
-.hide {
-  display: none;
+  border: 2px solid navy; //#00eed9;
+ // border-radius: 12px;
+  //box-shadow: 0 0 15px #00ffea, 0 0 30px #00ffea;
 }
