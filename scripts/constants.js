@@ -1,8 +1,7 @@
 const DIFFICULTY = [
-"Easy (1 - 10)",
-"Hard (1-20)",
-"Harder (1-30)",
-"Hardest (1 - 40)"
+{level: 10, label: "Easy (1 - 10)"},
+{level: 20, label: "Medium (10 - 20)"},
+{level: 30, label: "Hard (20 - 30)"},
 ];
 
 const FINISH = "FINISH";
