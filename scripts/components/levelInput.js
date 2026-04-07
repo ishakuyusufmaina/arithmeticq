@@ -1,4 +1,4 @@
-class LevelInput extends HTMLDivElement {
+class LevelInput extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -330,6 +330,6 @@ class LevelInput extends HTMLDivElement {
   get onchange() { return this._onchange; }
 
   static {
-    customElements.define('level-input', LevelInput, { extends: 'div' });
+    customElements.define('level-input', LevelInput);
   }
 }
