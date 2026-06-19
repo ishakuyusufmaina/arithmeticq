@@ -9,7 +9,7 @@
         this.onQuestionAdmin = ()=>{};
         
         this.state="";
-        this.time = 15;
+        this.time = 30;
         document.getElementById("root").appendChild(this.root);
         this.promptLevelChoice();
 
