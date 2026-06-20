@@ -38,13 +38,21 @@ class Question {
             return Math.floor(num)
         }
         this.level = level;
-        this.term1 = this.randint(level)
-        this.term2 = this.randint(level)
-        let opSize = OPERATORS.length;
+        this.term1 = this.randint(level);
+        this.term2 = this.randint(level);
+        let intL = Number(level);
+        let operators = OPERATORS;
+        if (intL==1){
+            operators = ["+", "-"];
+        }
+        let opSize = operators.length;
         let opIndex = this.randint(opSize)
-        this.operator = OPERATORS[opIndex-1]
+        this.operator = operators[opIndex-1]
         if (this.operator == "/"){
             this.pickDivisible();
+        }
+        if ((1 > this.term1 - this.term2)  && intL==1){
+            this.pickSubtractable()
         }
         
     }
@@ -67,6 +75,13 @@ class Question {
             this.term1 = this.randint(this.level);
             this.term2 = this.randint(this.level);
             this.pickDivisible();
+        }
+     pickSubtractable(){
+        let result = this.term1 - this.term2;
+        if (Number(result) < 1){
+            this.term1 = this.randint(this.level);
+            this.term2 = this.randint(this.level);
+            this.pickSubtractable();
         }
     }
     
